@@ -1,0 +1,42 @@
+.ReactModal__Content.ReactModal__Content--after-open {
+    width: 30%;
+    height: 77vh;
+    background-color: #fdfdfdcf;
+    border: 1px solid;
+}
+.groupModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+.avatar {
+    height: 7rem;
+    width: 7rem;
+    background: black;
+    border-radius: 3.5rem;
+}
+.name {
+    display: flex;
+    flex-direction: column;
+    width: 71%;
+    gap: 0.3rem;
+}
+input.groupInput {
+    padding-left: 0.3rem;
+    border-radius: 2px;
+    border: 1px solid;
+}
+input.groupBtn {
+    width: 7rem;
+    height: 1.5rem;
+    border: 1px solid;
+    border-radius: 6px;
+    background-color: #f5deb300;
+    font-weight: 700;
+    cursor: pointer;
+}
+input.groupBtn:hover {
+    background-color: black;
+    color: white;
+}

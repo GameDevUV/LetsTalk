@@ -1,0 +1,52 @@
+.right-logs {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.top-logs {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.s-top-logs {
+    width: 9rem;
+    height: 9rem;
+    background-color: black;
+    border-radius: 4.5rem;
+}
+.login {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sub-logs {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+button.login-btn {
+    height: 2rem;
+    width: 6rem;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #0000000f;
+    color: white;
+    border: 1px solid black;
+    color: black;
+}
+
+.login-btn:hover{
+    background-color: #1a1a27;
+    color: white;
+}
