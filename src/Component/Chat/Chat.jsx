@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import axios from 'axios'
 import { io } from 'socket.io-client'
 import '../../App.css'
 import { ChatContext } from '../../Context/ChatContext'
@@ -7,10 +8,36 @@ import Message from '../Message/Message'
 import Profile from '../Profile/Profile'
 
 const Chat = () => {
-  const { userName, setId, setTyperUser, setChatArr, server, setisTyping, requests } = useContext(ChatContext);
+  const { userName, setId, setTyperUser, setChatArr, server, setisTyping, requests, setFContacts, searching } = useContext(ChatContext);
   const { setOnline } = useContext(ChatContext);
 
 
+  
+  useEffect(() => {
+    // console.log("hii by selected")
+    axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`).then((resp) => {
+      let letContact = resp.data.fullContacts;
+      // console.log(letContact)
+      setFContacts(letContact);
+
+      // console.log(resp.data.fullContacts)
+    }).catch((e) => {
+      // console.log("error during fecthing get Contacts", e);
+    })
+  }, [searching])
+
+
+  // Another useEffect for searching
+
+  useEffect(() => {
+    if (searching) {
+      axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`)
+        .then((resp) => {
+          setFContacts(resp.data.fContacts);
+        })
+        .catch((e) => console.error("Error searching contacts:", e));
+    }
+  }, [searching]);
 
   useEffect(() => {
 
@@ -23,13 +50,13 @@ const Chat = () => {
       server.on('online', (payload) => {
         // console.log(payload.status);
         // chang user name
-        setOnline("user1", payload.status)
+        setOnline(userName, payload.status)
       })
       setUserOnline();
     })
 
     server.on('offline' , (payload)=>{
-      setOnline('user1' , payload.status)
+      setOnline(userName , payload.status)
     })
 
     return () => {

@@ -13,7 +13,9 @@ root.render(
       redirect_uri: 'http://localhost:3000'
     }} >
     <ChatProvider >
-      <App />
+      <React.StrictMode >
+        <App />
+      </React.StrictMode>
     </ChatProvider>
   </Auth0Provider>
 );

@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,6 +6,7 @@
     overflow-x: hidden;
     scrollbar-width: none;
 }
+
 .main {
     height: 100vh;
     width: 100vw;
@@ -14,6 +15,7 @@
     flex-direction: column;
     justify-content: end;
 }
+
 .Chats {
     display: flex;
     width: 100%;
@@ -22,6 +24,7 @@
     gap: 0.5rem;
     justify-content: center;
 }
+
 .contacts-search {
     width: 32%;
     display: flex;
@@ -30,6 +33,7 @@
     border-radius: 13px;
     background-color: white;
 }
+
 .right-contact {
     width: 87%;
     display: flex;
@@ -37,6 +41,7 @@
     gap: 1rem;
     align-items: center;
 }
+
 .profile {
     height: 5rem;
     width: 100%;
@@ -44,11 +49,13 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .profile- {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .profile-image {
     width: 2rem;
     height: 2rem;
@@ -57,12 +64,15 @@
     border-radius: 1rem;
     cursor: pointer;
 }
+
 p.profile-name {
     cursor: pointer;
 }
+
 .search-toggle {
     cursor: pointer;
 }
+
 ul.setting-ul {
     width: 100%;
     height: 3rem;
@@ -73,15 +83,18 @@ ul.setting-ul {
     align-items: center;
     border-radius: 22px;
 }
+
 li.setting-li {
     cursor: pointer;
     padding: 0.3rem 1.6rem;
     font-size: larger;
 }
+
 .setting-li:hover {
     background: white;
     border-radius: 14px;
 }
+
 .search-box {
     width: 100%;
     display: flex;
@@ -89,6 +102,7 @@ li.setting-li {
     align-items: center;
     height: 3rem;
 }
+
 input.search {
     width: 75%;
     border: 1px solid;
@@ -97,6 +111,7 @@ input.search {
     font-size: large;
     margin-right: 1px;
 }
+
 button.loging {
     width: 3rem;
     font-size: large;
@@ -112,23 +127,28 @@ button.loging {
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
 .friends-box {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     height: 80%;
 }
+
 .main-friend-scroll {
     margin-bottom: 1rem;
 }
+
 .friend-box-1 {
     width: 100%;
     border-radius: 10px;
     height: 1.7cm;
 }
-.friend-box-1:hover{
+
+.friend-box-1:hover {
     box-shadow: inset 1px 2px 7px 0px #7f7f7f;
 }
+
 .friendB {
     display: flex;
     justify-content: space-between;
@@ -140,18 +160,21 @@ button.loging {
     border-radius: 7px;
     padding-right: 4px;
 }
+
 .profile-pic-over {
     width: 12%;
     margin-left: 1rem;
     display: flex;
     align-items: center;
 }
+
 span.image {
     width: 100%;
     height: 80%;
     border-radius: 3rem;
     background: black;
 }
+
 .message-name {
     height: 100%;
     width: 66%;
@@ -159,6 +182,7 @@ span.image {
     flex-direction: column;
     margin-left: 0.5rem;
 }
+
 p.friendName {
     width: 80%;
     height: 100%;
@@ -169,6 +193,7 @@ p.friendName {
     color: #070707;
     height: 61%;
 }
+
 p.overView-msg {
     font-size: smaller;
     color: #1d1c1c;
@@ -176,11 +201,13 @@ p.overView-msg {
     width: 80%;
     overflow: hidden;
 }
+
 .time-and-seen {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 /* Chat Details */
 .chat-details {
     width: 100%;
@@ -192,27 +219,32 @@ p.overView-msg {
     padding: 0rem 1rem;
     align-items: center;
 }
+
 .left-name {
     display: flex;
     height: 100%;
     align-items: center;
 }
+
 .image-dp {
     height: 3rem;
     width: 3rem;
     display: flex;
 }
+
 span.dp {
     height: 100%;
     width: 100%;
     background: black;
     border-radius: 1.5rem;
 }
+
 p.name-det {
     margin-left: 1rem;
     font-size: x-large;
     font-weight: 400;
 }
+
 .right-call-options {
     height: 100%;
     width: 50%;
@@ -222,18 +254,21 @@ p.name-det {
     align-items: center;
     /* gap: 2rem; */
 }
+
 .opt-call {
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 2em;
+    gap: 2rem;
     font-size: x-large;
 }
+
 span.call {
     cursor: pointer;
 }
+
 /* Chat */
 .chatme {
     height: 100%;
@@ -247,6 +282,7 @@ span.call {
     background-image: url('./Assets/bg.jpg');
     background-size: cover;
 }
+
 .message-box {
     width: 80%;
     height: 90%;
@@ -254,6 +290,7 @@ span.call {
     overflow-x: hidden;
     padding-bottom: 1rem;
 }
+
 .input-box {
     width: 80vw;
     display: flex;
@@ -262,6 +299,7 @@ span.call {
     height: 10vh;
     background: #ffffff63;
 }
+
 .msg-form {
     width: 100%;
     height: 100%;
@@ -269,12 +307,14 @@ span.call {
     justify-content: center;
     align-items: center;
 }
+
 input.message-input {
     width: 50%;
     padding-left: 1rem;
     height: 2rem;
     font-size: larger;
 }
+
 button.send-button {
     width: 3rem;
     font-size: large;
@@ -283,10 +323,12 @@ button.send-button {
     height: 2rem;
     cursor: pointer;
 }
-button.send-button :hover{
+
+button.send-button :hover {
     background-color: black;
     color: white;
 }
+
 svg {
     height: 100%;
     width: 100%;
@@ -300,24 +342,29 @@ svg {
     justify-content: center;
     align-items: center;
 }
+
 .left-video {
     height: 100%;
     width: 35%;
     border-right: 2px solid #624646;
 }
+
 .left-video-full {
     height: 100%;
     width: 100%;
     background-image: url('./Assets/bgmsf4.jpg');
     background-size: cover;
 }
-.right-logs{
+
+.right-logs {
     background-image: url('./Assets/x.jpg');
 }
-.right-logs{
+
+.right-logs {
     /* background-image: url('./Assets/login-bg.jpg'); */
     background-size: cover;
 }
+
 .login {
     height: 100%;
     width: 65%;
@@ -327,6 +374,7 @@ svg {
     /* background-image: url('./Assets/login-bg.jpg'); */
     background-size: cover;
 }
+
 form.box {
     height: 100%;
     width: 100%;
@@ -335,6 +383,7 @@ form.box {
     display: flex;
     flex-direction: column;
 }
+
 .profile-photo-input {
     width: 100%;
     height: 40%;
@@ -343,6 +392,7 @@ form.box {
     align-items: center;
     background: #03030312;
 }
+
 .profile-photo-span {
     background-color: black;
     height: 35vh;
@@ -355,6 +405,7 @@ form.box {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 .input-area {
     height: 60%;
     display: flex;
@@ -365,11 +416,13 @@ form.box {
     gap: 0.3rem;
     background: #03030312;
 }
+
 label.login-lable {
     font-size: 20px;
     width: 25rem;
     padding-left: 0.3rem;
 }
+
 input.login-input {
     border: 1px solid;
     border-radius: 4px;
@@ -379,6 +432,7 @@ input.login-input {
     font-size: larger;
     margin-bottom: 0.5rem;
 }
+
 button.loging {
     width: 5rem;
     font-size: large;
@@ -398,10 +452,12 @@ button.loging {
     color: white;
     border: 1px solid black;
 }
+
 button.loging:hover {
     background-color: #cbcbcb5e;
     color: #0b0b0b;
 }
+
 /* messsage area  */
 .message-sub-box {
     min-height: 100%;
@@ -409,11 +465,13 @@ button.loging:hover {
     justify-content: end;
     flex-direction: column;
 }
+
 div#user {
     display: flex;
     justify-content: flex-end;
     width: 100%;
 }
+
 p.user {
     border: none;
     width: auto;
@@ -421,13 +479,14 @@ p.user {
     max-width: 70%;
     border-radius: 3px;
     margin-top: 1rem;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 0.3rem 1rem 0.3rem 1rem;
     margin-left: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     margin-right: 1rem;
 }
+
 p.member {
     border: none;
     width: auto;
@@ -443,27 +502,33 @@ p.member {
     margin-right: 1rem;
     box-shadow: 0 0 3px 3px darkgray;
 }
-#user-msg{
+
+#user-msg {
     border-radius: 18px 12px 23px 0px;
 }
-#member-msg{
+
+#member-msg {
     border-radius: 18px 12px 0px 18px;
 }
+
 span.user-name {
     color: aquamarine;
     font-size: smaller;
     font-weight: 600;
 }
+
 p.member-chat {
     font-size: larger;
     font-weight: 600;
 }
+
 div#member {
     display: flex;
     align-items: center;
     width: 100%;
     margin-left: 1rem;
 }
+
 span.user-profile {
     height: 2rem;
     width: 2rem;
@@ -488,6 +553,7 @@ button.login-btn {
     background-color: #77d2e1;
     color: #222222;
 }
+
 input.login-input {
     border: 1px solid;
     border-radius: 4px;
@@ -499,3 +565,52 @@ input.login-input {
     background-color: #7ec9d3;
     color: white;
 }
+
+
+/* responsive */
+.back-div {
+    display: none;
+}
+
+/* @media (max-width : 1000px){
+    .contacts-search {
+        width: 95%;
+    }
+    .friendB {
+        justify-content: center;
+    }
+    .back-div {
+        display: flex;
+        height: 50%;
+        padding-right: 1rem;
+    }
+    .chatme {
+        width: 95%;
+        display: none;
+    }
+    .message-box {
+        width: 90%;
+    }
+    .input-box {
+        width: 100%;
+        height: 12vh;
+    }
+    input.message-input {
+        width: 75%;
+    }
+    button.send-button {
+        width: 4rem;
+    }
+    span.image {
+        width: 3rem;
+        height: 3rem;
+        background: black;
+        border-radius: 2rem;
+    }
+    .profile-pic-over {
+        width: 9%;
+    }
+    .chtame {
+        display: none;
+    }
+} */

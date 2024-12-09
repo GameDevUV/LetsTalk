@@ -14,7 +14,7 @@ const ChatProvider = ({ children }) => {
 
   // states for profile and authentication
   const [displayName, setDisplayName] = useState('')
-  const [userName, setUserName] = useState('null');
+  const [userName, setUserName] = useState('vsgamer9595');
   const [profilePic, setProfilePic] = useState('')
   const [mobileNum, setMobileNum] = useState('91')
   const [mail, setMail] = useState('')
@@ -22,6 +22,8 @@ const ChatProvider = ({ children }) => {
   const [loggedin, setLoggedin] = useState(false);
   const [isalready, setIsalready] = useState(false);
   const [authanticated2, setAuthanticated2] = useState(false);
+  const [selectedChatId, setSelectedChatId] = useState('');
+  const [chatId , setChatId] = useState('');
 
   // requests
   const requests = [
@@ -38,6 +40,18 @@ const ChatProvider = ({ children }) => {
   ]
   // send data to api
 
+  // online
+  const setOnline = (userName, status) => {
+    axios.put('http://localhost:5000/user/status', {
+      userName,
+      status
+    }).then((resp) => {
+      // console.log("send : ", resp);
+
+    }).catch((e) => {
+      // console.log("error in send", e.response ? e.response.data : e.message);
+    })
+  }
   // const Login and authentication
   const genreateUserId = (userName) => {
     let userId = userName + "1l2e3t4s5talk"
@@ -60,13 +74,15 @@ const ChatProvider = ({ children }) => {
         MobileNumber: mobileNum,
         aboutme: about
       }).then((resp) => {
-        console.log("created resp: ", resp);
+        // console.log("created resp: ", resp);
         setLoggedin(true);
-        console.log("done added user");
+        setOnline(userName, 'ONLINE');
+        // console.log("done added user");
       })
     } else {
-      console.log("logged in")
+      // console.log("logged in")
       setLoggedin(true);
+      setOnline(userName, 'ONLINE');
     }
 
   }
@@ -86,9 +102,9 @@ const ChatProvider = ({ children }) => {
 
 
   // saving states at local storage
-  useEffect(() => {
-    window.localStorage.setItem('Logged', loggedin);
-  }, [loggedin])
+  // useEffect(() => {
+  //   window.localStorage.setItem('Logged', loggedin);
+  // }, [loggedin])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -99,11 +115,6 @@ const ChatProvider = ({ children }) => {
       if (user.phone_number) {
         setMobileNum(user.phone_number);
       } else { }
-      window.localStorage.setItem('userName', userName);
-      window.localStorage.setItem('displayName', displayName);
-      window.localStorage.setItem('dp', profilePic);
-      window.localStorage.setItem('num', mobileNum);
-      window.localStorage.setItem('mail', mail);
     }
   }, [isAuthenticated])
 
@@ -111,6 +122,7 @@ const ChatProvider = ({ children }) => {
 
 
   // socket methods
+
   const [searchResult, setSearchResult] = useState([]);
   const [searching, setSearching] = useState(false);
   const [selectedUser, setSelectedUser] = useState([])
@@ -135,7 +147,7 @@ const ChatProvider = ({ children }) => {
         let lsc = JSON.stringify(contacts)
         window.localStorage.setItem('localContacts', lsc)
       }).catch((e) => {
-        console.log("error :", e);
+        // console.log("error :", e);
       })
 
   }, [toTalk])
@@ -147,52 +159,66 @@ const ChatProvider = ({ children }) => {
           .then((resp) => {
             setTempFull(resp.data.user);
           }).catch((e) => {
-            console.log("error :", e);
+            // console.log("error :", e);
           })
       }
-    }else{
-      console.log("contacts is null")
+    } else {
+      // console.log("contacts is null")
     }
   }, [selectedUser])
 
-  // online
-  const setOnline = (userName, status) => {
-    axios.put('http://localhost:5000/user/status', {
-      userName,
-      status
-    }).then((resp) => {
-      // console.log("send : ", resp);
-    }).catch((e) => {
-      console.log("error in send", e.response ? e.response.data : e.message);
-    })
-  }
+
+
+  // useEffect(()=>{
+  //   setOnline(userName , 'ONLINE');
+  // },[]) 
   // search user
   const findUser = (userName) => {
     axios.get(`http://localhost:5000/user/finduser?username=${searchKeyword}`).then((resp) => {
-      console.log('search result', resp.data.data);
-      console.log('search full result', resp.data);
+      // console.log('search result', resp.data.data);
+      // console.log('search full result', resp.data);
 
       setSearchResult(resp.data.data);
     }).catch((e) => {
-      console.log('error in search users', e);
+      // console.log('error in search users', e);
     });
+  }
+
+  // add user to contact
+  const addToContact = (userName, selectedUser) => {
+    axios.put('http://localhost:5000/user/newcontacts', {
+      userName,
+      contactName: selectedUser
+    }).then((resp) => {
+    }).catch((e) => {
+      // console.log("error: ", e);
+    })
   }
 
   // create new chat
   const createChat = (userName, contact) => {
     axios.post('http://localhost:5000/chat/newchat', {
-      chatId: userName + "1234" + contact,
-      participants: [userName, contact],
+      participants: [userName, contact.userName],
     }).then((resp) => {
-      // console.log("resp : ", resp)
+      setSelectedChatId(resp.data.chatId);
+      server.emit('joinRoom' ,{chatId : resp.data.chatId } , 
+        (response) => {
+        console.log("Joined room:", resp.data.chatId);
+        console.log("Joined room:", response);
+      }
+    );
+      // console.log("Response: ", resp.data)
+      // console.log("selected chat id is: ", selectedChatId)
+      console.log("Room Joined Successfully: ")
+      
     }).catch((e) => {
-      console.log("error to create:", e);
+      // console.log("error to create:", e);
     })
   }
   // create group chat
   const createGroupChat = (groupName, userName) => {
     if (!groupName) {
-      console.log("give valid group name");
+      // console.log("give valid group name");
     } else {
       axios.post('http://localhost:5000/chat/newchat', {
         chatId: groupName + "1234" + userName,
@@ -200,107 +226,41 @@ const ChatProvider = ({ children }) => {
         participants: [userName],
         isGroupChat: true
       }).then((resp) => {
-        console.log("resp : ", resp)
+        // console.log("resp : ", resp)
         setGroupName('')
         setOpenGroup(false)
       }).catch((e) => {
-        console.log("error :", e);
+        // console.log("error :", e);
       })
     }
   }
   // select to Talk
   const selectTOTalk = (userName, i) => {
+    setChatArr([]);
     setToTalk(i);
-    addToContact(userName, i)
     createChat(userName, i);
     setSearching(false);
     setToggleS(false);
-    console.log("selected user to talk is :", i.userName);
+    addToContact(userName, i)
+    // console.log("selected user to talk is :", i.userName);
   }
-  // add user to contact
-  const addToContact = (userName, selectedUser) => {
-    axios.put('http://localhost:5000/user/newcontacts', {
-      userName,
-      contactName: selectedUser
-    }).then((resp) => {
-      console.log("user selected : ", resp.data.addedUser);
-    }).catch((e) => {
-      console.log("error: ", e);
-    })
-  }
+  
 
-  // First useEffect: Load from localStorage or fetch data
-  useEffect(() => {
-    // Retrieve fContacts from localStorage, fallback to an empty array if undefined
-    const localfContacts = JSON.parse(window.localStorage.getItem('fContacts') || "[]");
-
-    if (localfContacts.length === 0) {
-      console.log("No contacts in localStorage, fetching from server...");
-      axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`)
-        .then((resp) => {
-          let fetchedContacts = resp.data.fContacts;
-          for (let index = 0; index < fetchedContacts.length; index++) {
-            console.log("element at ", index, "is ", fetchedContacts[index])
-            setFContacts(prev => [...prev, fetchedContacts[index]])
-          }
-          window.localStorage.setItem('fContacts', JSON.stringify(fetchedContacts));
-        })
-        .catch((e) => console.error("Error fetching contacts:", e));
-    } else {
-      console.log("Loaded contacts from localStorage:", localfContacts);
-      setFContacts(localfContacts);
-    }
-  }, []);
-
-
-  // Second useEffect: Update localStorage when fContacts changes
-  useEffect(() => {
-    // if (fContacts !== null) {
-      
-    //   if (fContacts.length > 0) {
-    //     console.log("Updating localStorage with new fContacts");
-    //     window.localStorage.setItem('fContacts', JSON.stringify(fContacts));
-    //   }
-    // }.
-
-    console.log("f contacts is : ", fContacts);
-  }, [fContacts]);
-
-
-
-  // Another useEffect for searching
 
   useEffect(() => {
-    if (searching) {
-      axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`)
-        .then((resp) => {
-          setFContacts(resp.data.fContacts);
-        })
-        .catch((e) => console.error("Error searching contacts:", e));
-    }
-  }, [searching]);
-
-
-
-   // change on searching user
-   useEffect(() => {
-    if (searchKeyword === '' ) {
+    if (searchKeyword === '') {
       setSearching(false);
       setSearchKeyword('')
     } else {
       setSearching(true);
       findUser(searchKeyword);
     }
-    console.log("serched contacts: ", searchResult)
+    // console.log("serched contacts: ", searchResult)
   }, [searchKeyword.length])
 
 
-  // debigging
-  useEffect(() => {
-    console.log("Current fContacts:", fContacts);
-  }, [fContacts]);
 
-  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, requests, /* server side*/ setOnline, findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready , setSearchKeyword }
+  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, requests, /* server side*/ setOnline, findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId , createChat }
 
   return (
     <ChatContext.Provider value={data}>{children}</ChatContext.Provider>
