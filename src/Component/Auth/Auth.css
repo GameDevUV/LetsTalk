@@ -45,8 +45,28 @@ button.login-btn {
     border: 1px solid black;
     color: black;
 }
-
 .login-btn:hover{
     background-color: #1a1a27;
     color: white;
+}
+button.login-btn {
+    width: 11rem;
+    background-color: #a0eaf4;
+    border: 2px solid #483f3c;
+    font-size: larger;
+    font-family: cursive;
+}
+
+@media (max-width:1000px){
+    .left-video {
+        display: none;
+    }
+}
+@media (max-width:500px){
+    .right-logs {
+        height: 100%;
+        width: 100%;
+        background-image: url('../../Assets/bgmsf4.jpg');
+        background-size: cover;
+    }
 }

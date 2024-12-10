@@ -9,10 +9,10 @@ import Profile from '../Profile/Profile'
 
 const Chat = () => {
   const { userName, setId, setTyperUser, setChatArr, server, setisTyping, requests, setFContacts, searching } = useContext(ChatContext);
-  const { setOnline } = useContext(ChatContext);
+  const { setOnline, toggleContact, setToggleContact, toggle2 } = useContext(ChatContext);
 
 
-  
+
   useEffect(() => {
     // console.log("hii by selected")
     axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`).then((resp) => {
@@ -55,8 +55,8 @@ const Chat = () => {
       setUserOnline();
     })
 
-    server.on('offline' , (payload)=>{
-      setOnline(userName , payload.status)
+    server.on('offline', (payload) => {
+      setOnline(userName, payload.status)
     })
 
     return () => {
@@ -65,13 +65,28 @@ const Chat = () => {
 
   return (
     <>
-      <div className="main">
-        <div className="Chats">
-          <Contact />
-          <Profile />
-          <Message />
+      {
+        !toggle2 ? <div className="main">
+          <div className="Chats">
+            <Contact />
+            <Profile />
+            <Message />
+          </div>
+        </div> : <div className="main">
+          <div className="Chats">
+            {
+              !toggleContact ?
+                <>
+                  <Contact />
+                  <Profile />
+                </>
+                :
+                <Message />
+            }
+          </div>
         </div>
-      </div>
+      }
+
     </>
   )
 }

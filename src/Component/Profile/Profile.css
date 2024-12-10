@@ -111,7 +111,15 @@ button.logout-button {
     background-color: #888b8b;
     color: white;
     cursor: pointer;
+    font-size: large;
 }
 button.logout-button:hover {
     background-color: black;
+}
+
+@media (max-width:1000px) {
+    .ReactModal__Content.ReactModal__Content--after-open {
+        width: 95%;
+        height: 90vh;
+    }
 }

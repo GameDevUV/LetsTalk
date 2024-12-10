@@ -1,0 +1,42 @@
+.button-new-contact {
+    position: fixed;
+    z-index: 0;
+    bottom: 6vh;
+    left: 47vh;
+}
+
+.button-plus {
+    font-size: xx-large;
+    width: 3rem;
+    height: 3rem;
+    padding: 2px;
+    border: 1px solid;
+    border-radius: 19px 15px 12px 7px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    font-size: xx-large;
+    width: 3.2rem;
+    height: 3.2rem;
+    padding: 2px;
+    border: 1px solid;
+    border-radius: 19px 15px 12px 7px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+button.classic-seacrch {
+    height: 1.8rem;
+    color: black;
+    background-color: aliceblue;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+    cursor: pointer;
+}

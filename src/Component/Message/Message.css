@@ -1,0 +1,22 @@
+.chat-options {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    background: black;
+    color: white;
+    height: 7rem;
+    width: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+}
+
+ul.chat-ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+    cursor: pointer;
+}

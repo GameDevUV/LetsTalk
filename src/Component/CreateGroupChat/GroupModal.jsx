@@ -8,7 +8,7 @@ const GroupModal = () => {
   return (
     <Modal
       isOpen={openGroup}
-      onRequestClose={()=>setGroupName(false)}
+      onRequestClose={() => setOpenGroup(false)}
     >
       <div className="groupModal">
         <div className="avatar"></div>
@@ -19,9 +19,19 @@ const GroupModal = () => {
             onChange={(e) => setGroupName(e.target.value)}
             placeholder='my group name' />
         </div>
+        <div className="name2">
+          <label htmlFor="groupName2">Want to Make it secoure</label>
+          <input type="checkbox" name='CB' className="groupInput"
+            placeholder='my group name' />
+        </div>
         <div className="button-area">
           <input type="submit" value="Create Group"
             onClick={createGroupChate}
+            className='groupBtn' />
+        </div>
+        <div className="button-area">
+          <input type="submit" value="Add USers"
+            onClick={''}
             className='groupBtn' />
         </div>
       </div>

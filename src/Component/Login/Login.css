@@ -1,0 +1,14 @@
+@media (max-width: 450px){
+    div.profile-photo-span {
+        height: 12rem;
+        width: 12rem;
+    }
+    input.login-input {
+        width: 95vw;
+    }
+    label.login-lable {
+        width: 95vw;
+        color: #ffffff;
+        background-color: #00000038;
+    }
+}

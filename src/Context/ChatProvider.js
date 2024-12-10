@@ -25,20 +25,6 @@ const ChatProvider = ({ children }) => {
   const [selectedChatId, setSelectedChatId] = useState('');
   const [chatId , setChatId] = useState('');
 
-  // requests
-  const requests = [
-    "/user/adduser",
-    "/user/deleteData",
-    "/user/updateData",
-    "/user/finduser",
-    "/chat/newchat",
-    "/chat/sendmessage",
-    "/chat/getmessage",
-    "/chat/addtochat",
-    "/chat/removefromchat",
-    "/chat/deletemessage"
-  ]
-  // send data to api
 
   // online
   const setOnline = (userName, status) => {
@@ -97,14 +83,29 @@ const ChatProvider = ({ children }) => {
   // typing effect indicator
   const [isTyping, setisTyping] = useState(false);
   const [typerUser, setTyperUser] = useState(''); //for who is typing
+  const [toggleContact , setToggleContact] = useState(false)
+  const [toggle2 , setToggle2] = useState(false)
 
-
-
+  // let toggleChat = ()=>{
+  //   set
+  // }
 
   // saving states at local storage
   // useEffect(() => {
   //   window.localStorage.setItem('Logged', loggedin);
   // }, [loggedin])
+
+  useEffect(()=>{
+    if(window.innerWidth <= 1000){
+      setToggleContact(false);
+      setToggle2(true)
+      console.log(window.innerWidth);
+    }else{
+      setToggleContact(true);
+      setToggle2(false)
+      console.log("greater then called: ",window.innerWidth);
+    }
+  } , [])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -239,6 +240,7 @@ const ChatProvider = ({ children }) => {
     setChatArr([]);
     setToTalk(i);
     createChat(userName, i);
+    setToggleContact(true);
     setSearching(false);
     setToggleS(false);
     addToContact(userName, i)
@@ -259,8 +261,24 @@ const ChatProvider = ({ children }) => {
   }, [searchKeyword.length])
 
 
+  const [chatType, setChatType] = useState('private');
 
-  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, requests, /* server side*/ setOnline, findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId , createChat }
+
+  const openNewChats = ()=>{
+    switch (chatType) {
+      case 'private':
+        setToggleS(!toggleS);
+        break;
+      case 'groups':
+        setToggleS(false);
+        setOpenGroup(true);
+      default:
+        break;
+    }
+  }
+
+
+  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, /* server side*/ setOnline, findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId , createChat, toggleContact , setToggleContact , toggle2, openNewChats , chatType, setChatType}
 
   return (
     <ChatContext.Provider value={data}>{children}</ChatContext.Provider>

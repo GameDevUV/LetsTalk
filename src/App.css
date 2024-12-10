@@ -572,7 +572,7 @@ input.login-input {
     display: none;
 }
 
-/* @media (max-width : 1000px){
+@media (max-width : 1000px){
     .contacts-search {
         width: 95%;
     }
@@ -586,7 +586,7 @@ input.login-input {
     }
     .chatme {
         width: 95%;
-        display: none;
+        /* display: none; */
     }
     .message-box {
         width: 90%;
@@ -611,6 +611,6 @@ input.login-input {
         width: 9%;
     }
     .chtame {
-        display: none;
+        /* display: none; */
     }
-} */
+}

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { ChatContext } from '../../Context/ChatContext'
 import axios from 'axios';
+import './Login.css'
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Login = () => {

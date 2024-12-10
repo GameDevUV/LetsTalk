@@ -3,62 +3,45 @@ import { FaSearch } from "react-icons/fa";
 import { ChatContext } from '../../Context/ChatContext';
 import axios from 'axios';
 import GroupModal from '../CreateGroupChat/GroupModal';
+import NewButton from './NewButton';
 
 
 
 const Contact = () => {
   const { userName, setUserName, displayName, profilePic, mobileNum, setOpenprofile } = useContext(ChatContext);
   const { findUser, searchResult, setSearchResult, selectedUser, setSelectedUse, searching, setSearching, contacts, toTalk, setToTalk, fullContacts, selectTOTalk, addToContact, toggleS, setToggleS, fContacts, setFContacts, searchKeyword, setSearchKeyword } = useContext(ChatContext);
-  const { openGroup, setOpenGroup, groupName, setGroupName } = useContext(ChatContext);
-  const [groups, setGroups] = useState([]);
+  const { openGroup, setOpenGroup, groupName, setGroupName, toggleContact, setToggleContact, toggle2, chatType, setChatType } = useContext(ChatContext);
+
+  useEffect(() => {
+    switch (chatType) {
+      case 'private':
+        axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`).then((resp) => {
+          let letContact = resp.data.fullContacts;
+          setFContacts(letContact);
+        }).catch((e) => {
+          // console.log("error during fecthing get Contacts", e);
+        })
+        break;
+      case 'groups':
+        // fetch groups
+        setFContacts([]);
+        break;
+
+      default:
+        break;
+    }
+  }, [chatType])
 
 
-  let fetchedContacts = [];
-
-  // useEffect(() => {
-  //   const localfContacts = JSON.parse(window.localStorage.getItem('fContacts') || "[]");
-  //   if (localfContacts.length === 0) {
-  //     axios.get(`http://localhost:5000/user/selectedcontact?userName=${"user2"}`)
-  //       .then((resp) => {
-  //         fetchedContacts = resp.data.fullContacts;
-  //         // console.log(typeof(fetchedContacts))
-  //         for (let index = 0; index < fetchedContacts.length; index++) {
-  //           // console.log("element at " , index , "is " , fetchedContacts[index] )
-  //           if (fetchedContacts.isGroupChat) {
-  //             setGroups(prev => [...prev, fetchedContacts[index]])
-  //           } else {
-  //             setFContacts(prev => [...prev, fetchedContacts[index]])
-  //           }
-  //         }
-  //         window.localStorage.setItem('fContacts', JSON.stringify(fetchedContacts));
-  //         // console.log(fetchedContacts);
-  //       })
-  //       .catch((e) => console.error("Error fetching contacts:", e));
-  //   } else {
-  //     // console.log("Loaded contacts from localStorage:", localfContacts);
-  //     setFContacts(localfContacts);
-  //   }
-  // }, [])
-
-
-  // useEffect(() => {
-  //   // console.log("full contact is: ", fContacts)
-
-  //   axios.get(`http://localhost:5000/user/getcontacts?userName=${"user2"}`)
-  //     .then((resp) => {
-  //       // console.log("fetching contacts")
-  //       setFContacts(resp.data.fullContacts)
-  //       // console.log(resp);
-  //     }).catch((e) => {
-  //       // console.log("userNaem: ", userName)
-  //       // console.log("error in full contacts fatch: ", e)
-  //     })
-  // })
+  const toggleChatType = (type) => {
+    setChatType(type);
+  }
 
   return (
     <>
       <GroupModal />
-      <div className="contacts-search">
+      <NewButton />
+      <div className="contacts-search" >
         <div className="right-contact">
           <div className="profile">
             <div className="profile-" onClick={() => setOpenprofile(true)}>
@@ -72,12 +55,12 @@ const Contact = () => {
               placeholder='search user here'
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
-            /> <button ><FaSearch /></button>
+            /> <button className='classic-seacrch' ><FaSearch /></button>
           </div>
           <ul className="setting-ul">
-            <li className="setting-li">All</li>
-            <li className="setting-li">Groups</li>
-            <li className="setting-li">Secure</li>
+            <li className="setting-li" onClick={() => toggleChatType('private')}>Private</li>
+            <li className="setting-li" onClick={() => toggleChatType('groups')}>Groups</li>
+            <li className="setting-li" onClick={() => toggleChatType('secoured')}>Secure</li>
           </ul>
           <div className="friends-box">
             {
@@ -101,25 +84,25 @@ const Contact = () => {
                   </div>
                 </div>)
                 :
-                fContacts && fContacts.map((i, index) => 
-                    < div className="main-friend-scroll" key={index} onClick={() => selectTOTalk(userName, i)}>
-                      <div className="friend-box-1">
-                        <div className="friendB">
-                          <div className="profile-pic-over">
-                            <span className="image"></span>
-                          </div>
-                          <div className="message-name">
-                            <p className="friendName">{i.userName}</p>
-                            <p className="overView-msg">hii hellow hii</p>
-                          </div>
-                          <div className="time-and-seen">
-                            <span className="time">5:9am</span>
-                            <span className="seen">__</span>
-                          </div>
+                fContacts && fContacts.map((i, index) =>
+                  < div className="main-friend-scroll" key={index} onClick={() => selectTOTalk(userName, i)}>
+                    <div className="friend-box-1">
+                      <div className="friendB">
+                        <div className="profile-pic-over">
+                          <span className="image"></span>
+                        </div>
+                        <div className="message-name">
+                          <p className="friendName">{i.userName}</p>
+                          <p className="overView-msg">hii hellow hii</p>
+                        </div>
+                        <div className="time-and-seen">
+                          <span className="time">5:9am</span>
+                          <span className="seen">__</span>
                         </div>
                       </div>
                     </div>
-                
+                  </div>
+
                 )
             }
           </div>
