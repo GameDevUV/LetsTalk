@@ -4,10 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-*.env
-*.env.example
-*.env.local
-*.env.staging
+
+.env
+
 
 # testing
 /coverage
