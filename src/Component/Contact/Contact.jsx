@@ -16,7 +16,7 @@ const Contact = () => {
   useEffect(() => {
     switch (chatType) {
       case 'private':
-        axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`).then((resp) => {
+        axios.get(`${process.env.API}user/selectedcontact?userName=${userName}`).then((resp) => {
           let letContact = resp.data.fullContacts;
           setFContacts(letContact);
           console.log("groups are fContacts: ", fContacts)
@@ -26,7 +26,7 @@ const Contact = () => {
         })
         break;
       case 'groups':
-        axios.get(`http://localhost:5000/chat/getGroup?userName=${userName}`).then((resp) => {
+        axios.get(`${process.env.API}chat/getGroup?userName=${userName}`).then((resp) => {
           let letContact = resp.data.groups;
           setFContacts(letContact);
           console.log("groups are fContacts: ", fContacts)

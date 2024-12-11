@@ -29,7 +29,7 @@ const Message = () => {
   },[chatArr])
 
   const fetchMeaage = (chatId) => {
-    axios.get(`http://localhost:5000/chat/getmessage?chatid=${chatId}`).then((resp) => {
+    axios.get(`${process.env.API}chat/getmessage?chatid=${chatId}`).then((resp) => {
       setChatArr(resp.data.messages);
     }).catch((e) => {
     }).finally(() => {

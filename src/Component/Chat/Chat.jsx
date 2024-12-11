@@ -15,7 +15,7 @@ const Chat = () => {
 
   useEffect(() => {
     // console.log("hii by selected")
-    axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`).then((resp) => {
+    axios.get(`${process.env.API}user/selectedcontact?userName=${userName}`).then((resp) => {
       let letContact = resp.data.fullContacts;
       // console.log(letContact)
       setFContacts(letContact);
@@ -31,7 +31,7 @@ const Chat = () => {
 
   useEffect(() => {
     if (searching) {
-      axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`)
+      axios.get(`${process.env.API}user/selectedcontact?userName=${userName}`)
         .then((resp) => {
           setFContacts(resp.data.fContacts);
         })

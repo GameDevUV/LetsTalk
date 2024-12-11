@@ -9,7 +9,7 @@ const GroupModal = () => {
   let [participants , setParticipants] = useState([]);
 
   let createNewGroup = () => {
-    axios.post('http://localhost:5000/chat/newchat', {
+    axios.post(`${process.env.API}chat/newchat`, {
       participants: [userName],
       isGroupChat: true,
       groupName: groupName
