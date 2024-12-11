@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile'
 
 const Chat = () => {
   const { userName, setId, setTyperUser, setChatArr, server, setisTyping, requests, setFContacts, searching } = useContext(ChatContext);
-  const { toggleContact, setToggleContact, toggle2 } = useContext(ChatContext);
+  const { toggleContact, setToggleContact, toggle2, refresh , setRefresh } = useContext(ChatContext);
 
 
 
@@ -45,6 +45,9 @@ const Chat = () => {
       server.emit('setOnline', { userName })
     });
 
+    server.on('refresh' , (payload)=>{
+      setRefresh(!refresh);
+    })
     return () => {
       server.off("connect");
     };

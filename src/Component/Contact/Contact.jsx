@@ -8,9 +8,10 @@ import NewButton from './NewButton';
 
 
 const Contact = () => {
-  const { userName, setUserName, displayName, profilePic, mobileNum, setOpenprofile } = useContext(ChatContext);
+  const { userName, setUserName, displayName, profilePic, mobileNum, setOpenprofile, refresh } = useContext(ChatContext);
   const { findUser, searchResult, setSearchResult, selectedUser, setSelectedUse, searching, setSearching, contacts, toTalk, setToTalk, fullContacts, selectTOTalk, addToContact, toggleS, setToggleS, fContacts, setFContacts, searchKeyword, setSearchKeyword } = useContext(ChatContext);
   const { openGroup, setOpenGroup, groupName, setGroupName, toggleContact, setToggleContact, toggle2, chatType, setChatType } = useContext(ChatContext);
+
 
   useEffect(() => {
     switch (chatType) {
@@ -37,7 +38,7 @@ const Contact = () => {
       default:
         break;
     }
-  }, [chatType, groupName])
+  }, [chatType, groupName , refresh])
 
 
   const toggleChatType = (type) => {

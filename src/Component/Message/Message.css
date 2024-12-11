@@ -20,3 +20,7 @@ ul.chat-ul {
     gap: 0.3rem;
     cursor: pointer;
 }
+span.member-chat {
+    color: white;
+    margin-top: 0.3rem;
+}

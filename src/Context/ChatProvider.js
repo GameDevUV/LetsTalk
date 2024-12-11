@@ -24,6 +24,7 @@ const ChatProvider = ({ children }) => {
   const [authanticated2, setAuthanticated2] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState('');
   const [chatId, setChatId] = useState('');
+  let [refresh , setRefresh] = useState(false);
 
 
  
@@ -256,7 +257,7 @@ const ChatProvider = ({ children }) => {
   const [openAddToGropu , setOpenAddToGroup] = useState(false)
 
 
-  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, /* server side*/  findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId, createChat, toggleContact, setToggleContact, toggle2, openNewChats, chatType, setChatType, openAddToGropu , setOpenAddToGroup }
+  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, /* server side*/  findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId, createChat, toggleContact, setToggleContact, toggle2, openNewChats, chatType, setChatType, openAddToGropu , setOpenAddToGroup, refresh , setRefresh }
 
   return (
     <ChatContext.Provider value={data}>{children}</ChatContext.Provider>

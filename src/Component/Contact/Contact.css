@@ -47,3 +47,20 @@ span.online-indi {
     height: 15px;
     border-radius: 10PX;
 }
+
+span.image {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+@media (max-width: 1000px) {
+    
+    .button-new-contact {
+        position: fixed;
+        z-index: 0;
+        bottom: 6vh;
+        left: auto;
+        right: 2rem;
+    }
+}
