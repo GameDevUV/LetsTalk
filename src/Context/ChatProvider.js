@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { io } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client'
 import { ChatContext } from "./ChatContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
@@ -23,21 +23,11 @@ const ChatProvider = ({ children }) => {
   const [isalready, setIsalready] = useState(false);
   const [authanticated2, setAuthanticated2] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState('');
-  const [chatId , setChatId] = useState('');
+  const [chatId, setChatId] = useState('');
 
 
-  // online
-  const setOnline = (userName, status) => {
-    axios.put('http://localhost:5000/user/status', {
-      userName,
-      status
-    }).then((resp) => {
-      // console.log("send : ", resp);
+ 
 
-    }).catch((e) => {
-      // console.log("error in send", e.response ? e.response.data : e.message);
-    })
-  }
   // const Login and authentication
   const genreateUserId = (userName) => {
     let userId = userName + "1l2e3t4s5talk"
@@ -62,13 +52,11 @@ const ChatProvider = ({ children }) => {
       }).then((resp) => {
         // console.log("created resp: ", resp);
         setLoggedin(true);
-        setOnline(userName, 'ONLINE');
         // console.log("done added user");
       })
     } else {
       // console.log("logged in")
       setLoggedin(true);
-      setOnline(userName, 'ONLINE');
     }
 
   }
@@ -83,29 +71,21 @@ const ChatProvider = ({ children }) => {
   // typing effect indicator
   const [isTyping, setisTyping] = useState(false);
   const [typerUser, setTyperUser] = useState(''); //for who is typing
-  const [toggleContact , setToggleContact] = useState(false)
-  const [toggle2 , setToggle2] = useState(false)
+  const [toggleContact, setToggleContact] = useState(false)
+  const [toggle2, setToggle2] = useState(false)
 
-  // let toggleChat = ()=>{
-  //   set
-  // }
 
-  // saving states at local storage
-  // useEffect(() => {
-  //   window.localStorage.setItem('Logged', loggedin);
-  // }, [loggedin])
-
-  useEffect(()=>{
-    if(window.innerWidth <= 1000){
+  useEffect(() => {
+    if (window.innerWidth <= 1000) {
       setToggleContact(false);
       setToggle2(true)
       console.log(window.innerWidth);
-    }else{
+    } else {
       setToggleContact(true);
       setToggle2(false)
-      console.log("greater then called: ",window.innerWidth);
+      console.log("greater then called: ", window.innerWidth);
     }
-  } , [])
+  }, [])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -170,9 +150,7 @@ const ChatProvider = ({ children }) => {
 
 
 
-  // useEffect(()=>{
-  //   setOnline(userName , 'ONLINE');
-  // },[]) 
+
   // search user
   const findUser = (userName) => {
     axios.get(`http://localhost:5000/user/finduser?username=${searchKeyword}`).then((resp) => {
@@ -202,16 +180,16 @@ const ChatProvider = ({ children }) => {
       participants: [userName, contact.userName],
     }).then((resp) => {
       setSelectedChatId(resp.data.chatId);
-      server.emit('joinRoom' ,{chatId : resp.data.chatId } , 
+      server.emit('joinRoom', { chatId: resp.data.chatId },
         (response) => {
-        console.log("Joined room:", resp.data.chatId);
-        console.log("Joined room:", response);
-      }
-    );
+          console.log("Joined room:", resp.data.chatId);
+          console.log("Joined room:", response);
+        }
+      );
       // console.log("Response: ", resp.data)
       // console.log("selected chat id is: ", selectedChatId)
       console.log("Room Joined Successfully: ")
-      
+
     }).catch((e) => {
       // console.log("error to create:", e);
     })
@@ -246,7 +224,7 @@ const ChatProvider = ({ children }) => {
     addToContact(userName, i)
     // console.log("selected user to talk is :", i.userName);
   }
-  
+
 
 
   useEffect(() => {
@@ -262,9 +240,7 @@ const ChatProvider = ({ children }) => {
 
 
   const [chatType, setChatType] = useState('private');
-
-
-  const openNewChats = ()=>{
+  const openNewChats = () => {
     switch (chatType) {
       case 'private':
         setToggleS(!toggleS);
@@ -277,8 +253,10 @@ const ChatProvider = ({ children }) => {
     }
   }
 
+  const [openAddToGropu , setOpenAddToGroup] = useState(false)
 
-  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, /* server side*/ setOnline, findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId , createChat, toggleContact , setToggleContact , toggle2, openNewChats , chatType, setChatType}
+
+  const data = { id, setId, message, setMessage, chatArr, setChatArr, login, loggedin, server, isTyping, setisTyping, typerUser, setTyperUser, at, userName, setUserName, displayName, setDisplayName, profilePic, setProfilePic, mobileNum, setMobileNum, mail, setMail, openprofile, setOpenprofile, setLoggedin, about, setAbout, /* server side*/  findUser, addToContact, selectTOTalk, searchResult, setSearchResult, selectedUser, setSelectedUser, searching, setSearching, contacts, setContacts, toTalk, setToTalk, toggleS, setToggleS, fContacts, setFContacts, createGroupChat, openGroup, setOpenGroup, groupName, setGroupName, isalready, setIsalready, setSearchKeyword, selectedChatId, setSelectedChatId, createChat, toggleContact, setToggleContact, toggle2, openNewChats, chatType, setChatType, openAddToGropu , setOpenAddToGroup }
 
   return (
     <ChatContext.Provider value={data}>{children}</ChatContext.Provider>

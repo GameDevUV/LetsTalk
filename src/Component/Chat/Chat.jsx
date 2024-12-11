@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile'
 
 const Chat = () => {
   const { userName, setId, setTyperUser, setChatArr, server, setisTyping, requests, setFContacts, searching } = useContext(ChatContext);
-  const { setOnline, toggleContact, setToggleContact, toggle2 } = useContext(ChatContext);
+  const { toggleContact, setToggleContact, toggle2 } = useContext(ChatContext);
 
 
 
@@ -40,27 +40,14 @@ const Chat = () => {
   }, [searching]);
 
   useEffect(() => {
-
-    const setUserOnline = () => {
-      // console.log("you are online");
-    }
-
     server.on('connect', () => {
-      // set user to online
-      server.on('online', (payload) => {
-        // console.log(payload.status);
-        // chang user name
-        setOnline(userName, payload.status)
-      })
-      setUserOnline();
-    })
-
-    server.on('offline', (payload) => {
-      setOnline(userName, payload.status)
-    })
+      console.log("message emmited")
+      server.emit('setOnline', { userName })
+    });
 
     return () => {
-    }
+      server.off("connect");
+    };
   }, [])
 
   return (

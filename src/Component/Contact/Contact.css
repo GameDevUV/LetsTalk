@@ -40,3 +40,10 @@ button.classic-seacrch {
     border: 2px solid;
     cursor: pointer;
 }
+
+/* online indiactor */
+span.online-indi {
+    width: 15px;
+    height: 15px;
+    border-radius: 10PX;
+}

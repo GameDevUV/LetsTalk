@@ -18,19 +18,26 @@ const Contact = () => {
         axios.get(`http://localhost:5000/user/selectedcontact?userName=${userName}`).then((resp) => {
           let letContact = resp.data.fullContacts;
           setFContacts(letContact);
+          console.log("groups are fContacts: ", fContacts)
+
         }).catch((e) => {
           // console.log("error during fecthing get Contacts", e);
         })
         break;
       case 'groups':
-        // fetch groups
-        setFContacts([]);
+        axios.get(`http://localhost:5000/chat/getGroup?userName=${userName}`).then((resp) => {
+          let letContact = resp.data.groups;
+          setFContacts(letContact);
+          console.log("groups are fContacts: ", fContacts)
+        }).catch((e) => {
+          console.log("error during fecthing get groups", e);
+        })
         break;
 
       default:
         break;
     }
-  }, [chatType])
+  }, [chatType, groupName])
 
 
   const toggleChatType = (type) => {
@@ -45,7 +52,8 @@ const Contact = () => {
         <div className="right-contact">
           <div className="profile">
             <div className="profile-" onClick={() => setOpenprofile(true)}>
-              <div className="profile-image" style={{ backgroundImage: `url(${profilePic})` }}></div>
+              <div className="profile-image" style={{ backgroundImage: `url(${profilePic})` }}>
+              </div>
               <p className="profile-name">{userName || "not"}</p>
             </div>
             <div className="search-toggle"><FaSearch onClick={() => setToggleS(!toggleS)} /></div>
@@ -58,15 +66,15 @@ const Contact = () => {
             /> <button className='classic-seacrch' ><FaSearch /></button>
           </div>
           <ul className="setting-ul">
-            <li className="setting-li" onClick={() => toggleChatType('private')}>Private</li>
-            <li className="setting-li" onClick={() => toggleChatType('groups')}>Groups</li>
-            <li className="setting-li" onClick={() => toggleChatType('secoured')}>Secure</li>
+            <li className="setting-li" onClick={() => setChatType('private')}>Private</li>
+            <li className="setting-li" onClick={() => setChatType('groups')}>Groups</li>
+            <li className="setting-li" onClick={() => setChatType('secoured')}>Secure</li>
           </ul>
           <div className="friends-box">
             {
               searching ? searchResult.map((i, index) =>
                 <div className="main-friend-scroll" key={index}
-                  onClick={() => selectTOTalk(userName, i.userName)}>
+                  onClick={() => selectTOTalk(userName, (i.userName || i.groupName))}>
                   <div className="friend-box-1" >
                     <div className="friendB">
                       <div className="profile-pic-over">
@@ -89,10 +97,16 @@ const Contact = () => {
                     <div className="friend-box-1">
                       <div className="friendB">
                         <div className="profile-pic-over">
-                          <span className="image"></span>
+                          <span className="image">
+                            {
+                             i.status === 'ONLINE' ?
+                               <span className="online-indi" style={{backgroundColor : '#06fb06'}}></span>
+                               : ''
+                              }
+                          </span>
                         </div>
                         <div className="message-name">
-                          <p className="friendName">{i.userName}</p>
+                          <p className="friendName">{i.userName || i.groupName}</p>
                           <p className="overView-msg">hii hellow hii</p>
                         </div>
                         <div className="time-and-seen">
