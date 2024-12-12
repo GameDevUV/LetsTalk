@@ -13,10 +13,12 @@ const Contact = () => {
   const { openGroup, setOpenGroup, groupName, setGroupName, toggleContact, setToggleContact, toggle2, chatType, setChatType } = useContext(ChatContext);
 
 
+
   useEffect(() => {
+    console.log(process.env.REACT_APP_LETS_TALK_API)
     switch (chatType) {
       case 'private':
-        axios.get(`${process.env.API}user/selectedcontact?userName=${userName}`).then((resp) => {
+        axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/selectedcontact?userName=${userName}`).then((resp) => {
           let letContact = resp.data.fullContacts;
           setFContacts(letContact);
           console.log("groups are fContacts: ", fContacts)
@@ -26,7 +28,7 @@ const Contact = () => {
         })
         break;
       case 'groups':
-        axios.get(`${process.env.API}chat/getGroup?userName=${userName}`).then((resp) => {
+        axios.get(`${process.env.REACT_APP_LETS_TALK_API}chat/getGroup?userName=${userName}`).then((resp) => {
           let letContact = resp.data.groups;
           setFContacts(letContact);
           console.log("groups are fContacts: ", fContacts)

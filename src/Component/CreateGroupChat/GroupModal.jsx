@@ -9,7 +9,7 @@ const GroupModal = () => {
   let [participants , setParticipants] = useState([]);
 
   let createNewGroup = () => {
-    axios.post(`${process.env.API}chat/newchat`, {
+    axios.post(`${process.env.REACT_APP_LETS_TALK_API}chat/newchat`, {
       participants: [userName],
       isGroupChat: true,
       groupName: groupName

@@ -9,7 +9,7 @@ const AddUserModal = () => {
     let [usersList, setUsersList] = useState('');
 
     useEffect(() => {
-        axios.get(`${process.env.API}user/selectedcontact?userName=${userName}`)
+        axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/selectedcontact?userName=${userName}`)
             .then((resp) => {
                 let letContact = resp.data.fullContacts;
                 setAContacts(letContact)
@@ -19,7 +19,7 @@ const AddUserModal = () => {
     }, [])
 
     let add = ()=>{
-        axios.put(`${process.env.API}chat/addtochat` , {
+        axios.put(`${process.env.REACT_APP_LETS_TALK_API}chat/addtochat` , {
             chatId : selectedChatId,
             userName : setUsersList
         }).then((resp)=>{

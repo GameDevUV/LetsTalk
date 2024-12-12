@@ -1,10 +1,12 @@
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
     background-color: rgb(255 255 255 / 0%);
 }
+
 .ReactModal__Content.ReactModal__Content--after-open {
     width: 50%;
     height: 90vh;
 }
+
 .profile-modal {
     height: 100%;
     width: 100%;
@@ -12,6 +14,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .profile-area {
     width: 100%;
     height: 100%;
@@ -20,6 +23,7 @@
     align-items: center;
     flex-direction: column;
 }
+
 .pic-name-main {
     height: 33%;
     width: 100%;
@@ -27,12 +31,14 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
 .logout-exit {
     width: 100%;
     height: 33%;
     display: flex;
     align-items: center;
 }
+
 .profile-pic-left {
     width: 9rem;
     height: 9rem;
@@ -40,53 +46,80 @@
     justify-content: center;
     align-items: center;
 }
+
 span.pic- {
     height: 100%;
     width: 100%;
     background-size: contain;
     border-radius: 5rem;
 }
+
 .details {
     height: 100%;
     width: 50%;
     display: flex;
     align-items: center;
 }
+
 .details-tab {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
 }
+
 .abt {
     width: 85%;
 }
-#name {
-    font-size: 24px;
+
+input.user-profile {
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
+    font-size: larger;
+    padding-left: 3px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
+
 p.detail-name-e {
     font-size: 18px;
 }
+
 p.detail-name {
     font-size: 16px;
 }
+
 .details-tb {
-    height: auto;
+    height: 30%;
     width: 90%;
     display: flex;
     align-items: self-start;
     flex-direction: column;
     justify-content: center;
     padding-left: 3rem;
-    gap: 2rem;
+    /* gap: 2rem; */
+    margin-top: 1rem;
 }
+
+.abt {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+}
+
 span.tag {
     font-size: 16px;
 }
+
 p.detail-name {
     font-size: 20px;
 }
+
 .logout-exit {
     width: 90%;
     height: 10%;
@@ -95,6 +128,7 @@ p.detail-name {
     justify-content: center;
     border-top: 2px solid;
 }
+
 .lgout {
     width: 100%;
     height: 100%;
@@ -103,6 +137,7 @@ p.detail-name {
     gap: 2rem;
     justify-content: center;
 }
+
 button.logout-button {
     width: 5rem;
     height: 1.5rem;
@@ -113,13 +148,64 @@ button.logout-button {
     cursor: pointer;
     font-size: large;
 }
+
 button.logout-button:hover {
     background-color: black;
+}
+
+p.secourityItem {
+    font-size: large;
+    margin-bottom: 1rem;
+}
+
+span.idea {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2em;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: azure;
+    cursor: help;
+}
+
+.secourity-button-tab {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+button.secoure {
+    width: 4rem;
+    height: 2rem;
+    border-radius: 6px;
+    border: 1px solid;
+    padding: 2px;
+    background-color: orange;
+}
+
+button.TAC {
+    font-size: large;
+}
+
+button.secoure:hover {
+    background-color: #09be98;
+    color: white;
+    border: 1px solid black;
 }
 
 @media (max-width:1000px) {
     .ReactModal__Content.ReactModal__Content--after-open {
         width: 95%;
         height: 90vh;
+    }
+    .ReactModal__Content.ReactModal__Content--after-open {
+        inset: unset;
+    }
+    input.user-profile {
+        font-size: medium;
     }
 }

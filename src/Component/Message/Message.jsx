@@ -29,7 +29,7 @@ const Message = () => {
   },[chatArr])
 
   const fetchMeaage = (chatId) => {
-    axios.get(`${process.env.API}chat/getmessage?chatid=${chatId}`).then((resp) => {
+    axios.get(`${process.env.REACT_APP_LETS_TALK_API}chat/getmessage?chatid=${chatId}`).then((resp) => {
       setChatArr(resp.data.messages);
     }).catch((e) => {
     }).finally(() => {

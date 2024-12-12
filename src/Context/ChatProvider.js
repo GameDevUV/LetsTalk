@@ -1,3 +1,4 @@
+// require('dotenv').config();
 import { useEffect, useState } from "react";
 import { io, Socket } from 'socket.io-client'
 import { ChatContext } from "./ChatContext";
@@ -9,7 +10,7 @@ const ChatProvider = ({ children }) => {
   const { loginWithRedirect, user, isAuthenticated } = useAuth0();
 
   // connected to the server
-  const server = io(process.env.SOCKET, { transports: ['websocket'] });
+  const server = io(process.env.REACT_APP_SOCKET, { transports: ['websocket'] });
   const [openprofile, setOpenprofile] = useState(false)
 
   // states for profile and authentication
@@ -43,7 +44,7 @@ const ChatProvider = ({ children }) => {
     e.preventDefault();
     if (!isalready) {
       let xId = genreateUserId(userName);
-      axios.post(`${process.env.API}user/adduser`, {
+      axios.post(`${process.env.REACT_APP_LETS_TALK_API}user/adduser`, {
         userId: xId,
         userName: userName,
         email: mail,
@@ -123,7 +124,7 @@ const ChatProvider = ({ children }) => {
   // setting localstorage
   useEffect(() => {
     // change valuse of user1
-    axios.get(`${process.env.API}user/selfserve?username=${userName}`)
+    axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/selfserve?username=${userName}`)
       .then((resp) => {
         setContacts(resp.data.user[0].contacts)
         let lsc = JSON.stringify(contacts)
@@ -137,7 +138,7 @@ const ChatProvider = ({ children }) => {
   useEffect(() => {
     if (contacts === null) {
       for (let i = 0; i < contacts.length; i++) {
-        axios.get(`${process.env.API}user/selfserve?username=${contacts[i]}`)
+        axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/selfserve?username=${contacts[i]}`)
           .then((resp) => {
             setTempFull(resp.data.user);
           }).catch((e) => {
@@ -154,7 +155,7 @@ const ChatProvider = ({ children }) => {
 
   // search user
   const findUser = (userName) => {
-    axios.get(`${process.env.API}user/finduser?username=${searchKeyword}`).then((resp) => {
+    axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/finduser?username=${searchKeyword}`).then((resp) => {
       // console.log('search result', resp.data.data);
       // console.log('search full result', resp.data);
 
@@ -166,7 +167,7 @@ const ChatProvider = ({ children }) => {
 
   // add user to contact
   const addToContact = (userName, selectedUser) => {
-    axios.put(`${process.env.API}user/newcontacts`, {
+    axios.put(`${process.env.REACT_APP_LETS_TALK_API}user/newcontacts`, {
       userName,
       contactName: selectedUser
     }).then((resp) => {
@@ -177,7 +178,7 @@ const ChatProvider = ({ children }) => {
 
   // create new chat
   const createChat = (userName, contact) => {
-    axios.post( `${process.env.API}chat/newchat`, {
+    axios.post( `${process.env.REACT_APP_LETS_TALK_API}chat/newchat`, {
       participants: [userName, contact.userName],
     }).then((resp) => {
       setSelectedChatId(resp.data.chatId);
@@ -200,7 +201,7 @@ const ChatProvider = ({ children }) => {
     if (!groupName) {
       // console.log("give valid group name");
     } else {
-      axios.post(`${process.env.API}chat/newchat`, {
+      axios.post(`${process.env.REACT_APP_LETS_TALK_API}chat/newchat`, {
         chatId: groupName + "1234" + userName,
         groupName: groupName,
         participants: [userName],
@@ -253,6 +254,11 @@ const ChatProvider = ({ children }) => {
         break;
     }
   }
+
+
+  useEffect(()=>{
+    console.log("environment variable: ", process.env.REACT_APP_LETS_TALK_API);
+  }, [])
 
   const [openAddToGropu , setOpenAddToGroup] = useState(false)
 

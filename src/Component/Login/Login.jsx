@@ -11,7 +11,7 @@ const Login = () => {
 
   useEffect(()=>{
     
-    axios.get(`${process.env.API}user/check?mail=${mail}`)
+    axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/check?mail=${mail}`)
     .then((resp)=>{
       console.log("user details is ", resp.data);
       setIsalready(resp.data.find)
@@ -19,7 +19,7 @@ const Login = () => {
       if(isalready === false){
         setAuthanticated2(isAuthenticated);
       }else{
-        axios.get(`${process.env.API}user/selfserve?username=${userName}`)
+        axios.get(`${process.env.REACT_APP_LETS_TALK_API}user/selfserve?username=${userName}`)
         .then((resp)=>{
           setUserName(resp.data.user.userName);
           setDisplayName(resp.data.user.displayName);
