@@ -11,7 +11,7 @@ root.render(
     domain="dev-s0mz3pzksnphm1uv.us.auth0.com"
     clientId="kWNnulTMEhoyX1xl4Q2Wr16q9Fsmf7dc"
     authorizationParams={{
-      redirect_uri: 'http://localhost:3000'
+      redirect_uri: '/*'
     }} >
       <ChatProvider >
         <React.StrictMode >
