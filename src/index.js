@@ -11,7 +11,7 @@ root.render(
     domain="dev-s0mz3pzksnphm1uv.us.auth0.com"
     clientId="kWNnulTMEhoyX1xl4Q2Wr16q9Fsmf7dc"
     authorizationParams={{
-      redirect_uri: '/*'
+      redirect_uri: 'https://lets-talk-ua8g.onrender.com'
     }} >
       <ChatProvider >
         <React.StrictMode >
